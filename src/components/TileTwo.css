@@ -1,0 +1,26 @@
+.tile-two {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.image-container {
+  flex: 1;
+  padding: 20px;
+}
+
+.slide-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.text-container {
+  flex: 1;
+  padding: 20px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}

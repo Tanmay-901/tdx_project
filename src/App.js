@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
+import Fullpage, { FullpageSection } from '@ap.cx/react-fullpage';
+import Navbar from './components/Navbar';
+import TileOne from './components/TileOne';
+import TileTwo from './components/TileTwo';
+import TileThree from './components/TileThree';
 import './App.css';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Navbar />
+      <Fullpage>
+        <FullpageSection>
+          <TileOne />
+        </FullpageSection>
+        <FullpageSection>
+          <TileTwo />
+        </FullpageSection>
+        <FullpageSection>
+          <TileThree />
+        </FullpageSection>
+      </Fullpage>
     </div>
   );
-}
+};
 
 export default App;

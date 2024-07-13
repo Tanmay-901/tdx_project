@@ -1,0 +1,25 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar-left {
+  font-size: 20px;
+}
+
+.navbar-right a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-right a:hover {
+  text-decoration: underline;
+}
