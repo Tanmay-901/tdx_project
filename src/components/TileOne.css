@@ -1,25 +1,36 @@
 .tile-one {
-  height: 100vh;
+  height: calc(100vh - 45px); /* Adjust the height as needed */
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  padding-top: 60px; /* Adjust for navbar height */
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .carousel {
   position: relative;
-  width: calc(100% - 20px); /* A few pixels gap from all sides */
-  height: calc(100% - 80px); /* A few pixels gap from all sides */
+  width: 100%;
+  height: 100%;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-image.active {
+  opacity: 1;
 }
 
 .dots {
@@ -27,16 +38,18 @@
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .dot {
-  height: 15px;
-  width: 15px;
+  height: 12px;
+  width: 12px;
   margin: 0 5px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   display: inline-block;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .dot.active {

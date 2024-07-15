@@ -1,26 +1,61 @@
 .tile-two {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  height: calc(100vh - 25px);
+}
+
+.tile-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%; /* Adjust the width as needed */
 }
 
 .image-container {
-  flex: 1;
-  padding: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 400px; /* Set a fixed height for consistency */
+  perspective: 1800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.slide-image {
+.image {
+  position: absolute;
   width: 100%;
-  height: auto;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
   border-radius: 10px;
+  transition: transform 0.6s ease-in-out;
+  backface-visibility: hidden;
+}
+
+.image-container.hovered .front {
+  transform: rotateY(-180deg);
+}
+
+.image-container.hovered .back {
+  transform: rotateY(0deg);
+}
+
+.image.front {
+  transform: rotateY(0deg);
+}
+
+.image.back {
+  transform: rotateY(180deg);
 }
 
 .text-container {
   flex: 1;
   padding: 20px;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
+}
+
+.text-container h2,
+.text-container p {
+  margin: 0;
 }

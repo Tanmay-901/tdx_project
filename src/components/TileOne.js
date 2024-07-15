@@ -19,11 +19,14 @@ const TileOne = () => {
   return (
     <div className="tile-one">
       <div className="carousel">
-        <img
-          src={slides[currentSlide]}
-          alt={`Slide ${currentSlide + 1}`}
-          className="carousel-image"
-        />
+        {slides.map((slide, index) => (
+          <img
+            key={index}
+            src={slide}
+            alt={`Slide ${index + 1}`}
+            className={`carousel-image ${currentSlide === index ? 'active' : ''}`}
+          />
+        ))}
         <div className="dots">
           {slides.map((_, index) => (
             <span

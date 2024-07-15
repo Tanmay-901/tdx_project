@@ -3,12 +3,12 @@ import './Navbar.css';
 
 const Navbar = () => {
   return (
-    <nav>
-      <div className="navbar-left">Company Name</div>
-      <div className="navbar-right">
-        <a href="#about">About Us</a>
-        <a href="#join">Join Us</a>
-        <a href="#contact">Contact Us</a>
+    <nav className="navbar">
+      <div className="navbar-logo">TDX</div>
+      <div className="navbar-menu">
+        <a href="#home" className="navbar-menu-item">Home</a>
+        <a href="#about" className="navbar-menu-item">About Us</a>
+        <a href="#contact" className="navbar-menu-item">Contact Us</a>
       </div>
     </nav>
   );
