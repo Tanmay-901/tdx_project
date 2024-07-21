@@ -6,9 +6,9 @@ const TileThree = () => {
   const [currentQuestion, setCurrentQuestion] = useState(-1);
   const [startTransition, setStartTransition] = useState(false);
   const [userData, setUserData] = useState({});
-  const [name, setName] = useState('');
 
   const questions = [
+    "What do we call you?",
     "Where are you based?",
     "What’s your preferred way to travel?",
     "How long before do we notify you for a trip?",
@@ -18,6 +18,8 @@ const TileThree = () => {
     "Almost done! We would like to know who’s [name]?",
     "What are a few of your travel goals we as a community can do?"
   ];
+
+  const NAME_QUESTION = "What do we call you?";
 
   useEffect(() => {
     if (showQuestions) {
@@ -30,13 +32,14 @@ const TileThree = () => {
   }, [showQuestions]);
 
   const handleNextQuestion = () => {
-    // Only proceed to the next question if it's not the last question
-    if (currentQuestion < questions.length) {  // Line 22: Fix condition to check correctly
-      setCurrentQuestion(currentQuestion+1);
-    } else {
-      setShowQuestions(false);
-      console.log(JSON.stringify(userData, null, 2));
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
     }
+  };
+
+  const handleSubmit = () => {
+    console.log(JSON.stringify(userData, null, 2));
+    setShowQuestions(false);
   };
 
   const handleJoinNow = () => {
@@ -44,12 +47,13 @@ const TileThree = () => {
   };
 
   const handleInputChange = (e) => {
-    if (currentQuestion === 0) {
-      setName(e.target.value);
-    } else {
-      setUserData((prevData) => ({ ...prevData, [questions[currentQuestion - 3]]: e.target.value }));  // Fix indexing issue here
-    }
+    setUserData((prevData) => ({
+      ...prevData,
+      [questions[currentQuestion]]: e.target.value
+    }));
   };
+
+  const name = userData[NAME_QUESTION] || '';
 
   return (
     <div className="tile-three">
@@ -66,33 +70,24 @@ const TileThree = () => {
         {showQuestions && (
           <div className={`question-container ${startTransition ? 'start' : ''}`}>
             <div className="question-slide">
-              {currentQuestion === 0 && (
+              {currentQuestion >= 0 && currentQuestion < questions.length && (
                 <div className="question">
-                  <h3>What do we call you?</h3>
-                  <input type="text" value={name} onChange={handleInputChange} />
-                  <button className="next-button" onClick={handleNextQuestion}>Next</button>
+                  <h3>{questions[currentQuestion]}</h3>
+                  <input
+                    type="text"
+                    value={userData[questions[currentQuestion]] || ''}
+                    onChange={handleInputChange}
+                  />
+                  {currentQuestion === questions.length - 1 ? (
+                    <button className="next-button" onClick={handleSubmit}>Submit</button>
+                  ) : (
+                    <button className="next-button" onClick={handleNextQuestion}>Next</button>
+                  )}
                 </div>
               )}
               {currentQuestion === 1 && (
                 <div className="question">
                   <h3>Hello {name}! We are TDX. Welcome to the Community!</h3>
-                  <button className="next-button" onClick={handleNextQuestion}>Next</button>
-                </div>
-              )}
-              {currentQuestion === 2 && (
-                <div className="question">
-                  <h3>We have curated some questions to know your preferences</h3>
-                  <button className="next-button" onClick={handleNextQuestion}>Next</button>
-                </div>
-              )}
-              {currentQuestion >= 3 && (
-                <div className="question">
-                  <h3>{questions[currentQuestion - 3]}</h3>
-                  <input
-                    type="text"
-                    value={userData[questions[currentQuestion - 3]] || ''}
-                    onChange={handleInputChange}
-                  />
                   <button className="next-button" onClick={handleNextQuestion}>Next</button>
                 </div>
               )}
