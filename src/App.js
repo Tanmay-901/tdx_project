@@ -1,5 +1,5 @@
 import React from 'react';
-import Fullpage, { FullPageSections, FullpageSection } from '@ap.cx/react-fullpage';
+import Fullpage, {FullpageSection } from '@ap.cx/react-fullpage';
 import Navbar from './components/Navbar';
 import TileOne from './components/TileOne';
 import TileTwo from './components/TileTwo';

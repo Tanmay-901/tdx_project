@@ -5,6 +5,13 @@ body {
 }
 
 .navbar {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,11 +27,13 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: black;
+  margin-left: 5%;
 }
 
 .navbar-menu {
   display: flex;
   align-items: center;
+  margin-right: 5%;
 }
 
 .navbar-menu-item {

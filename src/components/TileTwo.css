@@ -1,4 +1,5 @@
 .tile-two {
+  background-image: url('../assets/navbar.gif');
   display: flex;
   justify-content: center;
   align-items: center;
