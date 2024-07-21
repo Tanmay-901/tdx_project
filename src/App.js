@@ -20,7 +20,7 @@ const App = () => {
               <TileThree />
             </div>
           } />
-          <Route path="/faq" element={<FAQPage />} /> {/* Add the FAQPage route */}
+          <Route path="/faq" element={<FAQPage />} />
         </Routes>
       </div>
     </Router>
