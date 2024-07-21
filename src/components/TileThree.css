@@ -36,21 +36,25 @@
   width: 100%;
   overflow: hidden;
   margin-top: 20px;
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
 }
 
 .question-slide {
   display: flex;
-  transition: transform 0.5s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-in {
+  transform: translateX(100%);
+}
+
+.slide-out {
+  transform: translateX(-100%);
 }
 
 .question {
   min-width: 100%;
   flex-shrink: 0;
   box-sizing: border-box;
-  transition: opacity 0.5s ease-in-out;
-  opacity: 1; /* Ensure that the question is visible */
 }
 
 .question h3 {

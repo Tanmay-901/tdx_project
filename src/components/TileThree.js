@@ -4,7 +4,8 @@ import './TileThree.css';
 const TileThree = () => {
   const [showQuestions, setShowQuestions] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(-1);
-  const [startTransition, setStartTransition] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
+  const [direction, setDirection] = useState('in');
   const [userData, setUserData] = useState({});
 
   const questions = [
@@ -19,21 +20,23 @@ const TileThree = () => {
     "What are a few of your travel goals we as a community can do?"
   ];
 
-  const NAME_QUESTION = "What do we call you?";
+  // const NAME_QUESTION = "What do we call you?";
 
   useEffect(() => {
     if (showQuestions) {
-      const timer = setTimeout(() => {
-        setCurrentQuestion(0);
-        setStartTransition(true);
-      }, 300); // Delay to allow the initial content to transition out
-      return () => clearTimeout(timer);
+      setCurrentQuestion(0);
     }
   }, [showQuestions]);
 
   const handleNextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+      setDirection('out');
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+        setDirection('in');
+        setTransitioning(false);
+      }, 300); // Duration should match the CSS transition time
     }
   };
 
@@ -53,7 +56,7 @@ const TileThree = () => {
     }));
   };
 
-  const name = userData[NAME_QUESTION] || '';
+  // const name = userData[NAME_QUESTION] || '';
 
   return (
     <div className="tile-three">
@@ -68,8 +71,8 @@ const TileThree = () => {
           </>
         )}
         {showQuestions && (
-          <div className={`question-container ${startTransition ? 'start' : ''}`}>
-            <div className="question-slide">
+          <div className="question-container">
+            <div className={`question-slide ${transitioning ? `slide-${direction}` : ''}`}>
               {currentQuestion >= 0 && currentQuestion < questions.length && (
                 <div className="question">
                   <h3>{questions[currentQuestion]}</h3>
@@ -83,12 +86,6 @@ const TileThree = () => {
                   ) : (
                     <button className="next-button" onClick={handleNextQuestion}>Next</button>
                   )}
-                </div>
-              )}
-              {currentQuestion === 1 && (
-                <div className="question">
-                  <h3>Hello {name}! We are TDX. Welcome to the Community!</h3>
-                  <button className="next-button" onClick={handleNextQuestion}>Next</button>
                 </div>
               )}
             </div>

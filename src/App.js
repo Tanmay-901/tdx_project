@@ -1,27 +1,29 @@
 import React from 'react';
-import Fullpage, {FullpageSection } from '@ap.cx/react-fullpage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TileOne from './components/TileOne';
 import TileTwo from './components/TileTwo';
 import TileThree from './components/TileThree';
+import FAQPage from './components/FAQPage'; // Import the FAQPage component
 import './App.css';
 
 const App = () => {
   return (
-    <div className="app">
-      <Navbar />
-      <Fullpage>
-        <FullpageSection>
-          <TileOne />
-        </FullpageSection>
-        <FullpageSection>
-          <TileTwo />
-        </FullpageSection>
-        <FullpageSection>
-          <TileThree />
-        </FullpageSection>
-      </Fullpage>
-    </div>
+    <Router>
+      <div className="app">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={
+            <div>
+              <TileOne />
+              <TileTwo />
+              <TileThree />
+            </div>
+          } />
+          <Route path="/faq" element={<FAQPage />} /> {/* Add the FAQPage route */}
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
