@@ -1,34 +1,38 @@
 import React, { useState } from 'react';
-import image4 from '../assets/image4.png';
-import image5 from '../assets/image5.png';
 import './TileTwo.css';
+import image1 from '../assets/image1.png';
 
 const TileTwo = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+  const slides = [
+    'Detailed text description for slide 1.',
+    'Detailed text description for slide 2.',
+    // Add more slides as needed
+  ];
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
   };
 
-  const handleMouseLeave = () => {
-    setIsHovered(false);
+  const handlePrevSlide = () => {
+    setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
   };
 
   return (
-    <div className="tile-two">
-      <div className="tile-content">
-        <div 
-          className={`image-container ${isHovered ? 'hovered' : ''}`} 
-          onMouseEnter={handleMouseEnter} 
-          onMouseLeave={handleMouseLeave}
-        >
-          <div className="image front" style={{ backgroundImage: `url(${image4})` }}></div>
-          <div className="image back" style={{ backgroundImage: `url(${image5})` }}></div>
+    <div className={`tile-two-container ${isExpanded ? 'expanded' : ''}`} onMouseEnter={() => setIsExpanded(true)} onMouseLeave={() => setIsExpanded(false)}>
+      <div className="tile-two-content">
+        <div className="tile-two-text">
+          <h1>Essence of TDX</h1>
         </div>
-        <div className="text-container">
-          <h2>Discover the Beauty of Nature</h2>
-          <p>Experience the wonders of the natural world.</p>
-        </div>
+        {isExpanded && (
+          <div className="tile-two-carousel">
+            <div className="carousel-content">{slides[currentSlide]}</div>
+            <button className="carousel-button left" onClick={handlePrevSlide}>‹</button>
+            <button className="carousel-button right" onClick={handleNextSlide}>›</button>
+          </div>
+        )}
       </div>
     </div>
   );

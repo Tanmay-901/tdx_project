@@ -1,62 +1,87 @@
-.tile-two {
-  background-image: url('../assets/navbar.gif');
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100vh - 25px);
-}
+/* TileTwo.css */
 
-.tile-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%; /* Adjust the width as needed */
-}
-
-.image-container {
+.tile-two-container {
   position: relative;
-  width: 100%;
-  max-width: 500px;
-  height: 400px; /* Set a fixed height for consistency */
-  perspective: 1800px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: calc(100% - 40px); /* 20px gap on each side */
+  height: calc(100vh - 40px); /* 20px gap on each side */
+  margin: 20px;
+  background-color: white;
+  border-radius: 15px;
+  transition: all 0.5s ease;
+  overflow: hidden;
 }
 
-.image {
-  position: absolute;
+.tile-two-container.expanded {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+}
+
+.tile-two-content {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('../assets/image1.png');
   background-size: cover;
   background-position: center;
-  border-radius: 10px;
-  transition: transform 0.6s ease-in-out;
-  backface-visibility: hidden;
 }
 
-.image-container.hovered .front {
-  transform: rotateY(-180deg);
+.tile-two-text {
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+  color: white;
 }
 
-.image-container.hovered .back {
-  transform: rotateY(0deg);
-}
-
-.image.front {
-  transform: rotateY(0deg);
-}
-
-.image.back {
-  transform: rotateY(180deg);
-}
-
-.text-container {
-  flex: 1;
+.tile-two-carousel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
+  box-sizing: border-box;
+  transition: transform 0.5s ease;
 }
 
-.text-container h2,
-.text-container p {
-  margin: 0;
+.carousel-content {
+  font-size: 1.2em;
+  font-family: 'Cursive', sans-serif; /* Change to any catchy/unusual font */
+  text-align: center;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(211, 211, 211, 0.7); /* Light grey background */
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-button.left {
+  left: 10px;
+}
+
+.carousel-button.right {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  background-color: rgba(211, 211, 211, 1); /* Slightly darker on hover */
 }

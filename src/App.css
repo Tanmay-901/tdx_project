@@ -1,4 +1,11 @@
 .app {
   text-align: center;
-  padding-top: 45px;
+  height: 100vh;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #e0f7fa; /* Light blue background color */
+  font-family: 'Roboto', sans-serif; /* Ensure consistent font styling */
 }
