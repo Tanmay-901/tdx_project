@@ -1,37 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './FAQPage.css';
 
+// Utility function to convert text with links to React elements
+const renderAnswerText = (text) => {
+  // Regular expression to find markdown-like links
+  const regex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  // Split text by links
+  while ((match = regex.exec(text)) !== null) {
+    parts.push(text.slice(lastIndex, match.index));
+    parts.push(<a key={match.index} href={match[2]}>{match[1]}</a>);
+    lastIndex = regex.lastIndex;
+  }
+
+  // Push remaining text
+  parts.push(text.slice(lastIndex));
+
+  return <>{parts}</>;
+};
+
 const FAQPage = () => {
+  const [faqs, setFaqs] = useState([]);
   const [activeIndex, setActiveIndex] = useState(null);
   const [closingIndex, setClosingIndex] = useState(null);
 
-  const questions = [
-    {
-      question: "What is TDX?",
-      answer: [
-        "TDX is a community of travelers.",
-        "We offer personalized travel planning.",
-        "Join us to explore new destinations."
-      ],
-    },
-    {
-      question: "How can I join the community?",
-      answer: [
-        "Click on the Join Now button on the homepage.",
-        "Fill out the questionnaire to help us know you better.",
-        "Start receiving personalized travel plans."
-      ],
-    },
-    {
-      question: "What are the benefits of joining TDX?",
-      answer: [
-        "Access to exclusive travel deals.",
-        "Personalized travel planning.",
-        "Connect with like-minded travelers."
-      ],
-    },
-    // Add more questions as needed
-  ];
+  useEffect(() => {
+    const fetchFAQs = async () => {
+      try {
+        const response = await fetch('/faqs.json');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setFaqs(data);
+      } catch (error) {
+        console.error('Error fetching the FAQs:', error);
+      }
+    };
+
+    fetchFAQs();
+  }, []);
 
   const toggleAnswer = (index) => {
     if (activeIndex === index) {
@@ -50,7 +61,7 @@ const FAQPage = () => {
     <div className="faq-page">
       <h2 className="faq-title">Frequently Asked Questions</h2>
       <div className="faq-list">
-        {questions.map((item, index) => (
+        {faqs.map((item, index) => (
           <div key={index} className="faq-item">
             <div className="faq-question" onClick={() => toggleAnswer(index)}>
               <h3>{item.question}</h3>
@@ -58,9 +69,11 @@ const FAQPage = () => {
             </div>
             <div className={`faq-answer ${activeIndex === index ? 'active' : ''} ${closingIndex === index ? 'closing' : ''}`}>
               <div className="answer-content">
-                {item.answer.map((point, i) => (
-                  <p key={i}>{point}</p>
-                ))}
+                <ul>
+                  {item.answer.map((point, i) => (
+                    <li key={i}>{renderAnswerText(point)}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

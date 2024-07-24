@@ -1,0 +1,40 @@
+[
+    {
+      "question": "Who are we?",
+      "answer": [
+        "We are a bunch of explorers who've been testimonied to have found the best offbeat places of the country with meticulous research and create an unforgettable life experiences which once experienced would definitely evolve you as a person leaving with a whole lot of learning and a whole lot of fun!!",
+        "If you are a fellow explorer and love to see a new part of the world not seen or experienced by many, join us as we curate a community of people carefully based on your preferences and their likes and dislikes"
+      ]
+    },
+    {
+      "question": "Who are you?",
+      "answer": [
+        "You are a traveller/explorer and not a tourist.",
+        "You do not spend on lavish stays and would rather spend on experiences.",
+        "You love meeting other fellow explorer network and make friends."
+      ]
+    },
+    {
+      "question": "What is the membership fee for?",
+      "answer": [
+        "Our Team does a meticulous research using physical & digital maps, internet and satellite view to understand the terrain.",
+        "Build relationships with the locals so that you get the best hopitality possible.",
+        "Find the best spots or experiences that are still unknown to the tourists and thus enjoy the nature in it's purest form.",
+        "We curate and bring explorers who have the same energy as you do so that you meet some new explorers who have same interests as you do.",
+        "All your trips except for the accomodation fee will be free & valid for one year from your date of joining."
+      ]
+    },
+    {
+      "question": "How do we do it?",
+      "answer": [
+        "We take in your preferences in a series of questions in the [JOIN OUR COMMUNITY](localhost:3000) section.",
+        "We create a trip with all your preferences in mind so as to deliver you a core memory for the rest of your life.",
+        "We bring in other fellow explorers who would love to be a part of this epic journey whoever shares the same interest as you do.",
+        "We do a thorough research using offline and online resources all over to find the best spots that would give you an unforgettable experience.",
+        "We announce the trip.",
+        "We spend X no. of days amidst nature, do crazy things together, make some really good friends and build lifelong bonds."
+      ]
+    }
+
+  ]
+  

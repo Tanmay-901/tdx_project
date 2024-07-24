@@ -1,58 +1,69 @@
-import React, { useState } from 'react';
-import './Questionnaire.css';
+// src/components/Questionnaire.js
 
-const questions = [
-  { question: "What type of scenery do you prefer?", options: ["Mountains", "Beaches", "Forests", "Deserts"] },
-  { question: "What activities interest you?", options: ["Hiking", "Swimming", "Bird Watching", "Camping"] },
-  { question: "Preferred climate?", options: ["Tropical", "Temperate", "Cold", "Arid"] },
-  { question: "Accommodation preference?", options: ["Hotels", "Camping", "Hostels", "Cabins"] },
-  { question: "Travel duration?", options: ["Weekend", "1 Week", "2 Weeks", "1 Month"] },
-];
+import React, { useState, useEffect } from 'react';
+import './Questionnaire.css';
 
 const Questionnaire = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState(Array(questions.length).fill([]));
+  const [transitioning, setTransitioning] = useState(false);
+  const [direction, setDirection] = useState('in');
+  const [userData, setUserData] = useState({});
 
-  const handleChange = (option, questionIndex) => {
-    setAnswers(prevAnswers => {
-      const newAnswers = [...prevAnswers];
-      if (newAnswers[questionIndex].includes(option)) {
-        newAnswers[questionIndex] = newAnswers[questionIndex].filter(item => item !== option);
-      } else {
-        newAnswers[questionIndex] = [...newAnswers[questionIndex], option];
-      }
-      return newAnswers;
-    });
+  const questions = [
+    "What do we call you?",
+    "Where are you based?",
+    "What’s your preferred way to travel?",
+    "How long before do we notify you for a trip?",
+    "What do you like more? Mountain or Beach?",
+    "How would you rate your life experience so far on a scale of 10?",
+    "What do you think of life based on your experiences?",
+    "Almost done! We would like to know who’s [name]?",
+    "What are a few of your travel goals we as a community can do?"
+  ];
+
+  const handleNextQuestion = () => {
+    if (currentQuestion < questions.length - 1) {
+      setDirection('out');
+      setTransitioning(true);
+      setTimeout(() => {
+        setCurrentQuestion(currentQuestion + 1);
+        setDirection('in');
+        setTransitioning(false);
+      }, 300); // Duration should match the CSS transition time
+    }
   };
 
-  const handleNext = () => {
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      console.log('User Selections:', answers);
-      // Handle form submission logic here
-    }
+  const handleSubmit = () => {
+    console.log(JSON.stringify(userData, null, 2));
+  };
+
+  const handleInputChange = (e) => {
+    setUserData((prevData) => ({
+      ...prevData,
+      [questions[currentQuestion]]: e.target.value
+    }));
   };
 
   return (
     <div className="questionnaire">
-      <div className="question">
-        <legend>{questions[currentQuestion].question}</legend>
-        <div className="options">
-          {questions[currentQuestion].options.map((option, index) => (
-            <label key={index} className="option">
+      <div className="question-container">
+        <div className={`question-slide ${transitioning ? `slide-${direction}` : ''}`}>
+          {currentQuestion >= 0 && currentQuestion < questions.length && (
+            <div className="question">
+              <h3>{questions[currentQuestion]}</h3>
               <input
-                type="checkbox"
-                checked={answers[currentQuestion].includes(option)}
-                onChange={() => handleChange(option, currentQuestion)}
+                type="text"
+                value={userData[questions[currentQuestion]] || ''}
+                onChange={handleInputChange}
               />
-              {option}
-            </label>
-          ))}
+              {currentQuestion === questions.length - 1 ? (
+                <button className="next-button" onClick={handleSubmit}>Submit</button>
+              ) : (
+                <button className="next-button" onClick={handleNextQuestion}>Next</button>
+              )}
+            </div>
+          )}
         </div>
-        <button onClick={handleNext}>
-          {currentQuestion < questions.length - 1 ? 'Next' : 'Submit'}
-        </button>
       </div>
     </div>
   );
